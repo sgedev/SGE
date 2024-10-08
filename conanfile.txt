@@ -1,0 +1,13 @@
+[requires]
+libuv/1.49.0
+parg/1.0.3
+glfw/3.4
+assimp/5.4.2
+bullet3/3.25
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[layout]
+cmake_layout

@@ -1,0 +1,103 @@
+
+set(LUA_HEADERS
+	include/lauxlib.h
+	include/lua.h
+	include/luaconf.h
+	include/lualib.h
+)
+
+set(LUA_SOURCES
+	src/lua/ltable.h
+	src/lua/lstate.c
+	src/lua/lzio.h
+	src/lua/lmem.h
+	src/lua/lcorolib.c
+	src/lua/lundump.c
+	src/lua/ldo.c
+	src/lua/lopcodes.c
+	src/lua/lcode.h
+	src/lua/lgc.h
+	src/lua/lctype.h
+	src/lua/lparser.c
+	src/lua/lfunc.h
+	src/lua/ltablib.c
+	src/lua/lfunc.c
+	src/lua/lmathlib.c
+	src/lua/lbaselib.c
+	src/lua/ltable.c
+	src/lua/lmem.c
+	src/lua/llex.h
+	src/lua/loslib.c
+	src/lua/ltm.h
+	src/lua/loadlib.c
+	src/lua/lstrlib.c
+	src/lua/llex.c
+	src/lua/lgc.c
+	src/lua/lutf8lib.c
+	src/lua/lapi.h
+	src/lua/lcode.c
+	src/lua/lobject.h
+	src/lua/ldblib.c
+	src/lua/lstring.c
+	src/lua/lctype.c
+	src/lua/lstring.h
+	src/lua/liolib.c
+	src/lua/linit.c
+	src/lua/lparser.h
+	src/lua/lopcodes.h
+	src/lua/ljumptab.h
+	src/lua/lapi.c
+	src/lua/lobject.c
+	src/lua/ldebug.c
+	src/lua/lstate.h
+	src/lua/ldump.c
+	src/lua/ldo.h
+	src/lua/ldebug.h
+	src/lua/ltm.c
+	src/lua/lvm.c
+	src/lua/llimits.h
+	src/lua/lauxlib.c
+	src/lua/lundump.h
+	src/lua/lopnames.h
+	src/lua/lvm.h
+	src/lua/lprefix.h
+	src/lua/lzio.c
+)
+
+sge_add_shared_library(vm
+	OUTPUT_NAME
+		sge-vm
+	PRIVATE_SOURCES
+		${LUA_HEADERS}
+		${LUA_SOURCES}
+		include/sge/vm/common.h
+		include/sge/vm/config.h.in
+		include/sge/vm/kernel.h
+		include/sge/vm/hooks.h
+		src/sge/vm/world.c
+		src/sge/vm/backend.c
+		src/sge/vm/hooks.c
+		src/sge/vm/syscalls.c
+		src/sge/vm/context.c
+		src/sge/vm/context.h
+		src/sge/vm/state.h
+		src/sge/vm/kernel.c
+		src/sge/vm/syscalls.h
+	PUBLIC_INCLUDE_DIRECTORIES
+		${CMAKE_CURRENT_SOURCE_DIR}/include
+		${CMAKE_CURRENT_BINARY_DIR}/include
+	PUBLIC_DEFINITIONS
+		LUA_USER_H=\"${CMAKE_CURRENT_SOURCE_DIR}/include/sge/vm/hooks.h\"
+	DEPENDENCIES
+		base
+	PUBLIC_LINK_LIBRARIES
+		base
+	PUBLIC_HEADERS
+		include/sge/vm/common.h
+		include/sge/vm/kernel.h
+		${CMAKE_CURRENT_BINARY_DIR}/include/sge/vm/config.h
+		DESTINATION include/sge/vm
+	INSTALL_FILES
+		${LUA_HEADERS}
+		DESTINATION include
+)
